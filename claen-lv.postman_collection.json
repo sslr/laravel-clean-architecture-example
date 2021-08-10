@@ -1,0 +1,378 @@
+{
+	"info": {
+		"_postman_id": "f253542a-4108-4a67-a1bb-ebb0183857fa",
+		"name": "claen-lv",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Eloquent",
+			"item": [
+				{
+					"name": "UserPosts",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://0.0.0.0:23080/api/user/12/posts?limit=5&page=1",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "23080",
+									"path": [
+										"api",
+										"user",
+										"12",
+										"posts"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://0.0.0.0:23080/api/users?limit=5&page=2",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "23080",
+									"path": [
+										"api",
+										"users"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "store",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n            \"name\" : \"some one new\",\n            \"password\" : \"test\",\n            \"email\" : \"someone@test.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://0.0.0.0:23080/api/users",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "23080",
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://0.0.0.0:23080/api/users/30",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "23080",
+									"path": [
+										"api",
+										"users",
+										"30"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://0.0.0.0:23080/api/users/30",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "23080",
+									"path": [
+										"api",
+										"users",
+										"30"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://0.0.0.0:23080/api/posts?limit=10&page=2",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "23080",
+									"path": [
+										"api",
+										"posts"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "store",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n            \"authorId\" : 12,\n            \"title\" : \"it's another test\",\n            \"slug\" : \"its-another-test\",\n            \"summary\" : \"testing\",\n            \"content\" : \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\",\n            \"published\" : 0,\n            \"publishedAt\" : \"2021-07-25 00:43:14\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://0.0.0.0:23080/api/posts",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "23080",
+									"path": [
+										"api",
+										"posts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://0.0.0.0:23080/api/posts/102",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "23080",
+									"path": [
+										"api",
+										"posts",
+										"102"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://0.0.0.0:23080/api/posts/100",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "23080",
+									"path": [
+										"api",
+										"posts",
+										"100"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Static Data",
+			"item": [
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://0.0.0.0:23080/api/static/posts?limit=10&page=2",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "23080",
+									"path": [
+										"api",
+										"static",
+										"posts"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Static&Eloquent",
+			"item": [
+				{
+					"name": "Post",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://0.0.0.0:23080/api/static-eloquent/posts?limit=10&page=2",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "23080",
+									"path": [
+										"api",
+										"static-eloquent",
+										"posts"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

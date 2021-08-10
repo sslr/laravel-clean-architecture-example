@@ -1,0 +1,101 @@
+version: '3'
+
+volumes:
+  redis_data:
+    driver: local
+
+  mysql_data:
+    driver: local
+
+services:
+  ## --------------------------------------------
+  ## | 1: APP Web Server Php7 and required Extensions
+  ## --------------------------------------------
+  web:
+    build:
+      context: ./docker/web
+      dockerfile: Dockerfile
+      args:
+        - ENVIRONMENT=${APP_ENV}
+    expose:
+      - "80"
+      - "443"
+
+    volumes:
+      - ./:/var/www/
+      - ./docker/web/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/web/site.conf:/etc/nginx/sites-enabled/site.conf
+    ports:
+      - "23080:80"
+
+  ## --------------------------------------------
+  ## | 2: APP Web Server Php7 and required Extensions
+  ## --------------------------------------------
+  php:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+      args:
+        - ENVIRONMENT=${APP_ENV}
+    expose:
+      - "9000"
+
+    volumes:
+      - ./:/var/www/
+      - ./docker/php/php-fpm.conf:/usr/local/etc/php-fpm.conf
+      - ./docker/php/php_prod.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ./docker/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
+      - ./docker/php/log/supervisord/:/var/log/supervisord/
+
+  ## --------------------------------------------
+  ## |  3: Redis Instance
+  ## --------------------------------------------
+  redis:
+    image: redis:5.0.7
+    ports:
+      - "127.0.0.1:23085:6380"
+    volumes:
+      - redis_data:/data
+
+
+
+  ## --------------------------------------------
+  ## | 4: database server
+  ## --------------------------------------------
+  mysql:
+    build:
+      context: ./docker/mysql
+      dockerfile: Dockerfile
+
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "23008:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/config.ini:/etc/mysql/conf.d/config.ini
+
+  ## --------------------------------------------
+  ## | 5: PhpMyAdmin
+  ## --------------------------------------------
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.0.1
+    depends_on:
+      - mysql
+    ports:
+      - "23005:80"
+    environment:
+      - PMA_HOST=mysql
+    volumes:
+      - /sessions
+      - ./docker/phpmyadmin/save/:/var/www/phpmyadmin/save/
+      - ./docker/phpmyadmin/upload/:/var/www/phpmyadmin/upload/
+      - ./docker/phpmyadmin/config.php:/etc/phpmyadmin/config.user.inc.php
+#networks:
+#  default:
+#    external:
+#      name: "laravel-clean-arch-example"
