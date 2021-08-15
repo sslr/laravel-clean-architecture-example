@@ -15,5 +15,5 @@
 - find laravel-8x_php container ID and run "docker exec -it CONTAINER_ID bash"
 - inside the bash run "composer install"
 - after install is done, again inside the bash run "php artisan migrate"
-- gain inside the bash run "php artisan db:seed"
+- again inside the bash run "php artisan db:seed"
 - now find the "claen-lv.postman_collection.json" inside the root directory and import it to post man
