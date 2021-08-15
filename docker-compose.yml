@@ -16,6 +16,8 @@ services:
       context: ./docker/web
       dockerfile: Dockerfile
       args:
+        - WWW_DATA_USER=${APP_UID}
+        - WWW_DATA_GROUP=${APP_GID}
         - ENVIRONMENT=${APP_ENV}
     expose:
       - "80"
@@ -36,6 +38,8 @@ services:
       context: ./docker/php
       dockerfile: Dockerfile
       args:
+        - WWW_DATA_USER=${APP_UID}
+        - WWW_DATA_GROUP=${APP_GID}
         - ENVIRONMENT=${APP_ENV}
     expose:
       - "9000"
@@ -66,6 +70,9 @@ services:
     build:
       context: ./docker/mysql
       dockerfile: Dockerfile
+      args:
+        - UID=${APP_UID}
+        - GID=${APP_GID}
 
     restart: unless-stopped
     environment:

@@ -105,19 +105,9 @@ RUN usermod -u ${WWW_DATA_USER} www-data && \
     groupmod -g ${WWW_DATA_USER} www-data && \
     chown -R www-data:www-data /var/www/
 
-### supervisor configuration files
-
-
-COPY ./horizon/queue.conf /etc/supervisor/conf.d/queue.conf
-COPY ./horizon/schedule.conf /etc/supervisor/conf.d/schedule.conf
-COPY ./horizon/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY ./horizon/schedule.sh /usr/local/bin/schedule.sh
-
-RUN chmod +x /usr/local/bin/schedule.sh
 
 #### make bash files work both on windows system and unix based systems
-RUN apt-get install -y dos2unix && \
-    dos2unix /usr/local/bin/schedule.sh
+RUN apt-get install -y dos2unix
 
 # change TimeZone
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
